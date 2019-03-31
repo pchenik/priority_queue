@@ -27,10 +27,6 @@ class priority_queue {
     size_t __size;
     size_t __capacity;
 
-    //Constants for allocation of memory(yep it sucks)
-    static const size_t eps = 5;
-    //static const size_t delta = 1000;
-
     //Get index of next or previous vertex
     inline size_t parent(size_t i) { return i / 2; }
     inline size_t left_child(size_t i) { return 2 * i; }
