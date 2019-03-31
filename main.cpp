@@ -11,6 +11,8 @@ NOT WORKING YET
 
 using namespace std;
 
+#define sz(c) int((c).size())
+
 template<class T>
 struct Less{bool operator()(const T& a, const T& b) {return a < b; } };
 
@@ -96,17 +98,17 @@ public:
     inline T get_root() const { return root[1]; }
 
     void insert(const T& obj) {
-            if (__size == __capacity) {
-                __capacity += delta;
-                T* tmp = new T[__capacity];
-                for (size_t i = 1; i <= __size; ++i)
-                    tmp[i] = root[i], (root + i)->~T();
-                delete [] root;
-                root = tmp;
-            }
-            root[++__size] = obj;
-            accord[obj].insert(__size);
-            sift_up(__size, comp());
+        if (__size == __capacity) {
+            __capacity += delta;
+            T* tmp = new T[__capacity];
+            for (size_t i = 1; i <= __size; ++i)
+                tmp[i] = root[i], (root + i)->~T();
+            delete [] root;
+            root = tmp;
+        }
+        root[++__size] = obj;
+        accord[obj].insert(__size);
+        sift_up(__size, comp());
     }
 
     T extract_root() {
@@ -150,6 +152,7 @@ public:
         try {
             if (accord[obj].empty())
                 throw;
+            int t = sz(accord[obj]);
             remove_by_index(*accord[obj].begin());
             //accord[obj].erase(accord[obj].begin());
         }
@@ -168,9 +171,9 @@ int main() {
         a.insert(i);
     cout << a.size() << "hui" << endl;
     cout << a.get_root() << endl;
-    for(int i = 0; i < 10; i++)
-        cout << a.extract_root() << endl;
+    //for(int i = 0; i < 10; i++)
+    //    cout << a.extract_root() << endl;
     a.remove(9);
-    //cout << a.get_root() << endl;
+    cout << a.get_root() << endl;
     return 0;
 }
