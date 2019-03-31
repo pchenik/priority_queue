@@ -29,7 +29,7 @@ class priority_queue {
 
     //Constants for allocation of memory(yep it sucks)
     static const size_t eps = 5;
-    static const size_t delta = 1000;
+    //static const size_t delta = 1000;
 
     //Get index of next or previous vertex
     inline size_t parent(size_t i) { return i / 2; }
@@ -85,8 +85,8 @@ public:
     priority_queue & operator=(const priority_queue& obj) {
         if (root != obj.root) {
             __size = obj.size();
-            __capacity = obj.size() + eps;
-            T* tmp = new T[obj.size() + eps];
+            __capacity = __size + eps;
+            T* tmp = new T[__capacity];
             for (size_t i = 1; i <= __size; ++i)
                 tmp[i] = root[i], root[i]->~T();
             delete [] root;
@@ -99,7 +99,7 @@ public:
 
     void insert(const T& obj) {
         if (__size == __capacity) {
-            __capacity += delta;
+            __capacity ^= __capacity << 1;
             T* tmp = new T[__capacity];
             for (size_t i = 1; i <= __size; ++i)
                 tmp[i] = root[i], (root + i)->~T();
