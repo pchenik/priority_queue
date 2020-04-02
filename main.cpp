@@ -17,17 +17,14 @@ template<class T>
 struct Less{bool operator()(const T& a, const T& b) {return a < b; } };
 
 
-//comp - comporator pointing on which one's function for compare we should use
 template<class T, class comp = Less<T>>
 class priority_queue {
 
-    //Crucial variables
     T* root;
     map<T, set<size_t> > accord;
     size_t __size;
     size_t __capacity;
 
-    //Get index of next or previous vertex
     inline size_t parent(size_t i) { return i / 2; }
     inline size_t left_child(size_t i) { return 2 * i; }
     inline size_t right_child(size_t i) { return 2 * i + 1; }
@@ -118,7 +115,7 @@ public:
             return res;
         }
         catch (...) {
-            cout << "Error:" << " priority_queue don't contain any element" << endl;
+            cout << "Error:" << " priority_queue doesn't contain any element" << endl;
         }
     }
 
@@ -134,7 +131,7 @@ public:
             __size = __capacity = 0;
         }
         catch (...) {
-            cout << "Error:" << " priority_queue don't contain any element" << endl;
+            cout << "Error:" << " priority_queue doesn't contain any element" << endl;
         }
     }
 
@@ -153,7 +150,7 @@ public:
             //accord[obj].erase(accord[obj].begin());
         }
         catch (...) {
-            cout << "Error:" << " priority_queue don't contain an element" << endl;
+            cout << "Error:" << " priority_queue doesn't contain an element" << endl;
         }
     }
 
